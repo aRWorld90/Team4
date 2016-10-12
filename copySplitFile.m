@@ -1,13 +1,12 @@
 function copySplitFile(struct, dirname, dirname_new)
     % copySplitFile
-    % Split and separate each signal type cell array in a new directory
+    % Split and separate each signal type in a new directory
     %
     %    Parameter name      Value
     %    --------------      -----
-    %    'cellArray'        Matrix cell array of A, B, C, D, E or F type
-    %    'train_split'      Lenght of each split matrix for validation test (70%)
-    %    'dirname'          Current directory of each cell array
-    %    'dirname_copy'     New directory to copy the new split array
+    %    'struct'           Matrix cell array of A, B, C, D, E or F type
+    %    'dirname'          Current directory of each struct signal type
+    %    'dirname_new'      New directory to copy the new split array
     
     dirname_new = ['train_split/' dirname_new];
     [s, mess, messid] = mkdir(dirname_new);

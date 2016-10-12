@@ -1,5 +1,13 @@
 function createMask(struct, dirname, dirname_new)
-
+    % createMask
+    % Generate a mask for RGB, HSV & LAB space and and save each mask in a new directory
+    %
+    %    Parameter name      Value
+    %    --------------      -----
+    %    'struct'           Matrix cell array of A, B, C, D, E or F type
+    %    'dirname'          Current directory of each struct signl type
+    %    'dirname_new'      New directory to copy the new split array
+    
     dirname_new = ['train_split/mask/' dirname_new];
     [s, mess, messid] = mkdir(dirname_new);
     train_split = round(0.7*length(struct));
@@ -28,7 +36,7 @@ function createMask(struct, dirname, dirname_new)
         % figure;
         % imshow(red|blue);
 
-        % transform 
+        % transform HSV Space
         im_hsv = rgb2hsv(im);
         im_H = im_hsv(:,:,1);
         im_S = im_hsv(:,:,2);
@@ -58,6 +66,7 @@ function createMask(struct, dirname, dirname_new)
         % a (red positive values and  green negative values) (-128 a 128)
         % b (yellow positive values and blue negative values) (-128 a 128)
 
+        % transform LAB Space
         im_lab = rgb2lab(im);
         im_L = im_lab(:,:,1);
         im_a = im_lab(:,:,2);
@@ -85,8 +94,8 @@ function createMask(struct, dirname, dirname_new)
         % subplot(1,2,3)
         % imshow(blue3);
         
-        imwrite(mask_rgb, strjoin([dirname_new '/maskRGB_' toSplit(2) '.png'],''));
-        imwrite(mask_hsv, strjoin([dirname_new '/maskHSV_' toSplit(2) '.png'],''));
-        imwrite(mask_lab, strjoin([dirname_new '/maskLAB_' toSplit(2) '.png'],''));
+        imwrite(mask_rgb, strjoin([dirname_new '/mask.' toSplit(2) '.RGB.png'],''));
+        imwrite(mask_hsv, strjoin([dirname_new '/mask.' toSplit(2) '.HSV.png'],''));
+        imwrite(mask_lab, strjoin([dirname_new '/mask.' toSplit(2) '.LAB.png'],''));
     end
 end
